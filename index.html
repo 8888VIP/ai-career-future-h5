@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f4f8ff" />
+    <meta name="description" content="AI时代·孩子未来职业推演——面向6—15岁孩子家长的互动体验" />
+    <link rel="icon" href="data:," />
+    <title>AI时代·孩子未来职业推演</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell" id="app">
+      <section class="screen intro-screen is-active" id="introScreen" aria-labelledby="introTitle">
+        <div class="ambient ambient-one"></div>
+        <div class="ambient ambient-two"></div>
+        <header class="brand-row">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" role="img">
+              <path d="M16 3.5 19.2 11l7.3 3.2-7.3 3.2L16 25l-3.2-7.6-7.3-3.2 7.3-3.2L16 3.5Z" />
+              <circle cx="24.5" cy="7" r="2.3" />
+            </svg>
+          </div>
+          <div>
+            <strong>AI时代·孩子未来职业推演</strong>
+            <span>家长端互动体验</span>
+          </div>
+        </header>
+
+        <div class="hero-copy">
+          <span class="eyebrow">8—15分钟完成</span>
+          <h1 id="introTitle">看见孩子在AI时代<br /><em>更值得培养的能力</em></h1>
+          <p>不替孩子敲定一生，触摸时代脉搏，感受未来职业变化与能力方向。</p>
+        </div>
+
+        <div class="preview-card" aria-label="演示结果预览">
+          <div class="preview-head">
+            <div>
+              <span>能力推演卡</span>
+              <strong>示例结果预览</strong>
+            </div>
+            <div class="mini-orbit" aria-hidden="true"><i></i><b></b></div>
+          </div>
+          <div class="preview-grid">
+            <div class="preview-item">
+              <span class="dot dot-blue"></span>
+              <div><small>当前线索</small><b>会拆步骤，也愿意把想法做出来</b></div>
+            </div>
+            <div class="preview-item">
+              <span class="dot dot-orange"></span>
+              <div><small>建议培养</small><b>遇到卡点多试几次，学会和AI一起改</b></div>
+            </div>
+          </div>
+          <div class="path-row">
+            <span>可探索方向</span>
+            <div><b>AI创意设计</b><b>AIGC</b><b>AI机器人</b><b>AI通识</b><b>AI智能体</b></div>
+          </div>
+        </div>
+
+        <div class="intro-actions">
+          <button class="primary-button" id="startButton">开始未来推演 <span>→</span></button>
+          <p class="privacy-note">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2m-11 0h12v10H6V10Z" /></svg>
+            无需填写孩子姓名、学校或联系方式
+          </p>
+        </div>
+      </section>
+
+      <section class="screen chat-screen" id="chatScreen" aria-labelledby="chatTitle">
+        <header class="flow-header">
+          <button class="icon-button" id="backToIntro" aria-label="返回首页">←</button>
+          <div class="flow-title">
+            <strong id="chatTitle">了解孩子</strong>
+            <span id="stageCaption">第1阶段 · 找到真实线索</span>
+          </div>
+          <button class="text-button" id="restartButton">重来</button>
+        </header>
+        <div class="stage-track" aria-label="完成进度">
+          <i class="is-current"></i><i></i><i></i><i></i>
+        </div>
+
+        <div class="message-list" id="messageList" aria-live="polite"></div>
+
+        <div class="answer-dock" id="answerDock">
+          <div class="choice-list" id="choiceList"></div>
+          <button class="confirm-button" id="confirmMulti" hidden>确认选择</button>
+          <button class="add-detail-button" id="addDetailButton">＋ 补充一句</button>
+          <div class="detail-composer" id="detailComposer" hidden>
+            <textarea id="detailInput" rows="2" maxlength="80" placeholder="可以补充一个孩子的日常表现（选填）"></textarea>
+            <button id="submitDetail">发送</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen insight-screen" id="insightScreen" aria-labelledby="insightTitle">
+        <header class="result-header">
+          <button class="icon-button" data-back="chatScreen" aria-label="返回对话">←</button>
+          <span>第2阶段 · 职业新视角</span>
+          <button class="text-button restart-link">重来</button>
+        </header>
+        <div class="result-scroll">
+          <div class="section-kicker">职业任务拆解</div>
+          <h2 id="insightTitle">职业名称可能没变，<br />真正值钱的任务已经变了</h2>
+          <p class="section-lead" id="careerLead"></p>
+
+          <article class="career-card">
+            <div class="career-card-head">
+              <span>您关注的方向</span>
+              <strong id="careerTitle">软件工程师／程序员</strong>
+              <b id="careerRisk">结构转型型</b>
+            </div>
+            <div class="task-columns">
+              <div class="task-column ai-side">
+                <div class="task-icon">AI</div>
+                <h3>AI更容易分担</h3>
+                <ul id="aiTaskList"></ul>
+              </div>
+              <div class="task-column human-side">
+                <div class="task-icon">人</div>
+                <h3>人的价值在上升</h3>
+                <ul id="humanTaskList"></ul>
+              </div>
+            </div>
+            <div class="insight-callout">
+              <span>给家长的新视角</span>
+              <p id="careerInsight"></p>
+            </div>
+          </article>
+
+          <div class="source-note">趋势参考：世界经济论坛《Future of Jobs Report 2025》、ILO生成式AI与就业研究。这里只讨论任务变化，不预测职业消失。</div>
+          <button class="primary-button" id="showAbilityButton">继续看孩子的能力线索 <span>→</span></button>
+        </div>
+      </section>
+
+      <section class="screen result-screen" id="resultScreen" aria-labelledby="resultTitle">
+        <header class="result-header">
+          <button class="icon-button" data-back="insightScreen" aria-label="返回职业分析">←</button>
+          <span>第3—4阶段 · 能力与行动</span>
+          <button class="text-button restart-link">重来</button>
+        </header>
+        <div class="result-scroll">
+          <div class="result-hero">
+            <div class="section-kicker">孩子的能力推演卡</div>
+            <h2 id="resultTitle">未来不由一个职业名称决定</h2>
+            <p>根据您刚才提供的日常表现，孩子目前更值得发挥和加强的能力如下。</p>
+            <div class="profile-pills" id="profilePills"></div>
+          </div>
+
+          <section class="result-section">
+            <div class="section-title-row">
+              <div><span>01</span><h3>当前表现与建议培养</h3></div>
+            </div>
+            <div class="ability-list" id="abilityList"></div>
+          </section>
+
+          <section class="result-section">
+            <div class="section-title-row">
+              <div><span>02</span><h3>可以探索的方向</h3></div>
+            </div>
+            <div class="direction-list" id="directionList"></div>
+          </section>
+
+          <section class="result-section action-section">
+            <div class="section-title-row">
+              <div><span>03</span><h3>7天家庭小任务</h3></div>
+            </div>
+            <div class="challenge-card">
+              <div class="challenge-head">
+                <div class="calendar-icon"><b>7</b><span>DAY</span></div>
+                <div><strong id="challengeTitle">完成一个三版创意作品</strong><p>每天10—20分钟，大人先提问，不急着给答案</p></div>
+              </div>
+              <div class="check-list" id="challengeList"></div>
+              <div class="challenge-progress"><span id="challengeProgress">已完成 0/5</span><i><b id="challengeBar"></b></i></div>
+            </div>
+          </section>
+
+          <section class="course-card">
+            <span class="course-label">进一步体验</span>
+            <h3>让孩子亲手完成一次AI创作</h3>
+            <p>如果您想让孩子系统地培养AI时代的核心能力，可以了解一下我们的AIGC创意启蒙体验课，让孩子亲手试试用AI创作。</p>
+            <ul>
+              <li>从孩子自己的想法出发</li>
+              <li>经历生成、判断和多轮修改</li>
+              <li>完成一个可以讲给别人听的作品</li>
+            </ul>
+            <button class="course-button" id="courseButton">了解体验课 <span>→</span></button>
+          </section>
+
+          <div class="result-actions">
+            <button class="secondary-button" id="pdfButton">保存PDF报告</button>
+            <button class="secondary-button restart-link">重新推演</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="course-dialog" id="courseDialog">
+      <form method="dialog">
+        <button class="dialog-close" aria-label="关闭">×</button>
+        <span class="course-label">下一步体验</span>
+        <h2>让孩子亲手完成一次AI创作</h2>
+        <p>从一个小作品开始，让孩子提出想法、使用AI、反复修改，最后把作品和思路讲清楚。</p>
+        <div class="course-detail-grid">
+          <div><span>适合年龄</span><strong>6—15岁</strong></div>
+          <div><span>体验方式</span><strong>项目式创作</strong></div>
+          <div><span>孩子产出</span><strong>一份创意作品</strong></div>
+          <div><span>重点培养</span><strong>创意与人机协作</strong></div>
+        </div>
+        <div class="contact-divider"><span>想了解体验安排，直接联系老师</span></div>
+        <section class="wecom-panel">
+          <div class="wecom-heading">
+            <div class="wecom-badge">企微</div>
+            <div><span>企业微信</span><h3>添加天马老师</h3></div>
+          </div>
+          <p>扫码后说明孩子的年龄和兴趣，老师会介绍体验内容与适合的参与方式。</p>
+          <div class="qr-frame"><img src="./assets/wecom-qr.jpg" alt="天马老师企业微信二维码" /></div>
+          <strong class="contact-name">天马老师 · 首新科技</strong>
+          <a class="save-qr-button" href="./assets/wecom-qr.jpg" download="天马老师-企业微信二维码.jpg">保存二维码到手机</a>
+        </section>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status">已生成孩子的能力推演报告</div>
+    <script src="./app.js"></script>
+  </body>
+</html>
